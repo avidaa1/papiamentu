@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pap">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Papiamentu — Idioma Bibu</title>
+<meta name="description" content="Referènsia kompleto di ortografia, fonologia, gramátika i orígen di Papiamentu — standart FPI / Buki di Oro.">
+<meta name="theme-color" content="#0a0800">
+<meta property="og:title" content="Papiamentu — Idioma Bibu">
+<meta property="og:description" content="Referènsia kompleto di ortografia, fonologia, gramátika i orígen di Papiamentu.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0800'/%3E%3Ctext x='4' y='26' font-size='22' font-family='serif' fill='%23d4a853'%3EP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G8M1YZQ8WF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-G8M1YZQ8WF');</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Rajdhani:wght@400;500;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#d4a853;--gold2:#f0c96a;--amber:#b8863a;
+  --cream:#f5ede0;--ink:#1a1208;
+  --bg:#0a0800;--surface:rgba(20,15,5,.92);
+  --border:rgba(212,168,83,.18);--muted:rgba(212,168,83,.45);
+  --font-serif:'Cormorant Garamond',Georgia,serif;
+  --font-body:'Rajdhani',sans-serif;
+  --font-ui:'Orbitron',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--cream);font-family:var(--font-body);overflow-x:hidden;cursor:none;}
+@media(hover:hover){body{cursor:none;}}
+#cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;box-shadow:0 0 10px var(--gold);}
+#cursor-ring{position:fixed;width:28px;height:28px;border:1px solid rgba(212,168,83,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.veil{position:fixed;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 30%,rgba(10,8,0,.5)0%,rgba(10,8,0,.88)100%);}
+#topbar{position:fixed;top:0;left:0;right:0;z-index:30;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:rgba(10,8,0,.85);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
+#topbar-logo{font-family:var(--font-ui);font-size:10px;letter-spacing:5px;color:var(--gold);}
+#topbar-nav{display:flex;gap:6px;flex-wrap:wrap;}
+.tnav{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:var(--font-ui);font-size:7px;letter-spacing:2px;padding:4px 10px;cursor:pointer;transition:all .2s;}
+.tnav:hover{border-color:var(--gold);color:var(--gold);}
+#back-home{font-family:var(--font-ui);font-size:8px;letter-spacing:2px;color:rgba(212,168,83,.4);text-decoration:none;transition:color .2s;}
+#back-home:hover{color:var(--gold);}
+#ticker{position:fixed;bottom:0;left:0;right:0;z-index:20;background:rgba(10,8,0,.8);border-top:1px solid var(--border);padding:5px 0;overflow:hidden;backdrop-filter:blur(8px);}
+.ticker-inner{display:flex;white-space:nowrap;animation:tickroll 60s linear infinite;}
+.ticker-inner:hover{animation-play-state:paused;}
+.tick-w{font-family:var(--font-ui);font-size:8px;letter-spacing:3px;padding:0 28px;color:var(--muted);}
+.tick-w b{color:var(--gold);}
+@keyframes tickroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+#hero{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px 60px;text-align:center;}
+.hero-badge{font-family:var(--font-ui);font-size:8px;letter-spacing:8px;color:var(--muted);border:1px solid var(--border);padding:5px 18px;margin-bottom:28px;animation:fadein 1s ease both;}
+@keyframes fadein{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+.hero-title{font-family:var(--font-serif);font-size:clamp(56px,12vw,120px);font-weight:700;letter-spacing:4px;line-height:1;background:linear-gradient(135deg,var(--cream) 0%,var(--gold2) 40%,var(--amber) 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadein .8s .2s ease both;filter:drop-shadow(0 0 30px rgba(212,168,83,.3));}
+.hero-sub{font-family:var(--font-serif);font-size:clamp(14px,2.5vw,22px);font-style:italic;color:rgba(245,237,224,.55);margin-top:12px;letter-spacing:1px;animation:fadein .8s .4s ease both;}
+.hero-desc{font-size:clamp(14px,2vw,17px);color:rgba(245,237,224,.5);letter-spacing:.5px;margin-top:20px;max-width:580px;line-height:1.8;animation:fadein .8s .6s ease both;}
+.hero-fpi{margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadein .8s .8s ease both;}
+.fpi-tag{font-family:var(--font-ui);font-size:8px;letter-spacing:3px;padding:6px 14px;border:1px solid var(--border);color:var(--muted);}
+.scroll-hint{margin-top:48px;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadein .8s 1.2s ease both;}
+.scroll-hint span{font-family:var(--font-ui);font-size:8px;letter-spacing:5px;color:rgba(212,168,83,.3);}
+.scroll-arr{width:1px;height:40px;background:linear-gradient(to bottom,rgba(212,168,83,.5),transparent);animation:sarr 2s ease-in-out infinite;}
+@keyframes sarr{0%,100%{opacity:.3;}50%{opacity:.9;}}
+.section{position:relative;z-index:10;padding:80px 24px;}
+.section-inner{max-width:1080px;margin:0 auto;}
+.sec-label{font-family:var(--font-ui);font-size:8px;letter-spacing:8px;color:var(--muted);margin-bottom:10px;}
+.sec-title{font-family:var(--font-serif);font-size:clamp(28px,5vw,52px);font-weight:700;color:var(--gold2);margin-bottom:48px;line-height:1.15;}
+.sec-title em{font-style:italic;color:var(--cream);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+@media(max-width:700px){.two-col{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);padding:28px 24px;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s;}
+.card:hover{border-color:rgba(212,168,83,.4);box-shadow:0 0 24px rgba(212,168,83,.06);}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s;}
+.card:hover::before{opacity:1;}
+.card-title{font-family:var(--font-serif);font-size:20px;font-weight:600;color:var(--gold2);margin-bottom:12px;}
+.card-body{font-size:14px;line-height:1.75;color:rgba(245,237,224,.65);}
+.card-body strong{color:var(--gold2);}
+.ref-table{width:100%;border-collapse:collapse;font-size:13px;}
+.ref-table th{font-family:var(--font-ui);font-size:8px;letter-spacing:3px;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--border);text-align:left;font-weight:400;}
+.ref-table td{padding:10px 14px;border-bottom:1px solid rgba(212,168,83,.06);color:rgba(245,237,224,.7);vertical-align:top;}
+.ref-table tr:hover td{background:rgba(212,168,83,.03);}
+.ref-table td:first-child{color:var(--gold2);font-weight:600;font-family:var(--font-serif);font-size:15px;}
+.tag-ok{color:rgba(80,220,120,.8);}
+.tag-err{color:rgba(255,80,80,.7);text-decoration:line-through;}
+#pronWidget{background:var(--surface);border:1px solid var(--border);padding:32px;margin-top:48px;}
+.pron-tabs{display:flex;gap:0;flex-wrap:wrap;margin-bottom:28px;border-bottom:1px solid var(--border);}
+.pron-tab{font-family:var(--font-ui);font-size:8px;letter-spacing:3px;padding:10px 18px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:all .2s;background:transparent;border-top:none;border-left:none;border-right:none;}
+.pron-tab.active,.pron-tab:hover{color:var(--gold);border-bottom-color:var(--gold);}
+.pron-panel{display:none;}
+.pron-panel.active{display:block;}
+.sound-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px;}
+.sound-card{background:rgba(212,168,83,.04);border:1px solid var(--border);padding:16px;cursor:pointer;transition:all .2s;text-align:center;}
+.sound-card:hover{border-color:var(--gold);background:rgba(212,168,83,.08);}
+.sound-card .glyph{font-family:var(--font-serif);font-size:32px;color:var(--gold2);display:block;margin-bottom:6px;}
+.sound-card .ipa{font-size:11px;color:var(--muted);letter-spacing:2px;display:block;margin-bottom:4px;}
+.sound-card .example{font-size:12px;color:rgba(245,237,224,.55);}
+.sound-card .playing{color:var(--gold);font-family:var(--font-ui);font-size:8px;letter-spacing:2px;margin-top:6px;display:none;}
+.sound-card.active .playing{display:block;}
+.accent-demo{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px;}
+.accent-box{background:rgba(212,168,83,.04);border:1px solid var(--border);padding:18px 22px;flex:1;min-width:180px;}
+.accent-mark{font-family:var(--font-serif);font-size:36px;color:var(--gold2);display:block;margin-bottom:6px;}
+.accent-name{font-family:var(--font-ui);font-size:7px;letter-spacing:3px;color:var(--muted);}
+.accent-rule{font-size:12px;color:rgba(245,237,224,.55);margin-top:8px;line-height:1.6;}
+.accent-examples{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.aex{background:rgba(212,168,83,.08);font-family:var(--font-serif);font-size:15px;color:var(--gold2);padding:4px 10px;border:1px solid var(--border);}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),transparent);}
+.tl-item{position:relative;margin-bottom:32px;}
+.tl-item::before{content:'';position:absolute;left:-32px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);}
+.tl-year{font-family:var(--font-ui);font-size:9px;letter-spacing:3px;color:var(--gold);margin-bottom:5px;}
+.tl-text{font-size:14px;line-height:1.75;color:rgba(245,237,224,.65);}
+.tl-text strong{color:var(--cream);}
+.origin-layers{display:flex;flex-direction:column;gap:8px;margin-top:24px;}
+.layer{display:flex;align-items:center;gap:16px;}
+.layer-bar{height:32px;border-radius:2px;display:flex;align-items:center;padding:0 14px;font-family:var(--font-ui);font-size:8px;letter-spacing:2px;color:#000;font-weight:700;}
+.layer-label{font-size:13px;color:rgba(245,237,224,.6);}
+.proverb{border-left:2px solid var(--gold);padding:16px 20px;margin-bottom:16px;background:rgba(212,168,83,.03);}
+.prov-text{font-family:var(--font-serif);font-size:19px;font-style:italic;color:var(--gold2);margin-bottom:6px;}
+.prov-trans{font-size:13px;color:rgba(245,237,224,.5);}
+.fpi-box{background:rgba(212,168,83,.05);border:1px solid var(--gold);padding:28px;margin-top:40px;position:relative;}
+.fpi-box::before{content:'BUKI DI ORO 2009';font-family:var(--font-ui);font-size:7px;letter-spacing:4px;color:var(--gold);position:absolute;top:-10px;left:20px;background:var(--bg);padding:0 8px;}
+.fpi-title{font-family:var(--font-serif);font-size:22px;color:var(--gold2);margin-bottom:12px;}
+.fpi-text{font-size:13px;line-height:1.8;color:rgba(245,237,224,.6);}
+#search-wrap{margin-bottom:32px;}
+#search-input{width:100%;background:rgba(212,168,83,.04);border:1px solid var(--border);color:var(--cream);font-family:var(--font-serif);font-size:16px;padding:12px 18px;outline:none;transition:border-color .2s;}
+#search-input:focus{border-color:var(--gold);}
+#search-input::placeholder{color:rgba(212,168,83,.25);}
+#search-results{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;}
+.s-result{background:rgba(212,168,83,.06);border:1px solid var(--border);padding:8px 14px;font-family:var(--font-serif);}
+.s-result .sw{font-size:17px;color:var(--gold2);}
+.s-result .sm{font-size:12px;color:rgba(245,237,224,.5);margin-top:2px;}
+#quiz{background:var(--surface);border:1px solid var(--border);padding:32px;margin-top:48px;}
+.quiz-q{font-family:var(--font-serif);font-size:20px;color:var(--cream);margin-bottom:20px;}
+.quiz-opts{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{background:transparent;border:1px solid var(--border);color:rgba(245,237,224,.7);font-family:var(--font-serif);font-size:16px;padding:12px 18px;cursor:pointer;text-align:left;transition:all .2s;}
+.quiz-opt:hover{border-color:var(--gold);color:var(--gold);}
+.quiz-opt.correct{border-color:#4cd880;color:#4cd880;background:rgba(76,216,128,.06);}
+.quiz-opt.wrong{border-color:rgba(255,80,80,.6);color:rgba(255,80,80,.7);}
+.quiz-feedback{margin-top:16px;font-size:14px;line-height:1.7;color:rgba(245,237,224,.6);min-height:24px;}
+.quiz-next{margin-top:16px;font-family:var(--font-ui);font-size:8px;letter-spacing:3px;padding:9px 20px;border:1px solid var(--border);color:var(--muted);background:transparent;cursor:pointer;transition:all .2s;display:none;}
+.quiz-next:hover{border-color:var(--gold);color:var(--gold);}
+.quiz-score{font-family:var(--font-ui);font-size:10px;letter-spacing:3px;color:var(--muted);text-align:right;margin-bottom:16px;}
+.divider{border:none;border-top:1px solid var(--border);margin:0;}
+.section[id]{scroll-margin-top:60px;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}#bg-canvas{display:none;}}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
+<div class="veil"></div>
+
+<div id="topbar">
+  <div id="topbar-logo">PAPIAMENTU</div>
+  <div id="topbar-nav">
+    <button class="tnav" onclick="goto('orígen')">ORÍGEN</button>
+    <button class="tnav" onclick="goto('ortografia')">ORTOGRAFIA</button>
+    <button class="tnav" onclick="goto('fonologia')">FONOLOGIA</button>
+    <button class="tnav" onclick="goto('gramatika')">GRAMÁTIKA</button>
+    <button class="tnav" onclick="goto('vokabulario')">VOKABULARIO</button>
+    <button class="tnav" onclick="goto('quiz')">QUIZ</button>
+  </div>
+  <a href="https://avidaa1.github.io" id="back-home">&#x2190; AVIDAA</a>
+</div>
+
+<div id="ticker"><div class="ticker-inner" id="tickInner"></div></div>
+
+<section id="hero">
+  <div class="hero-badge">FUNDASHON PA PLANIFIKASHON DI IDIOMA &middot; BUKI DI ORO 2009</div>
+  <div class="hero-title">Papiamentu</div>
+  <div class="hero-sub">Idioma Bibu</div>
+  <div class="hero-desc">Un referènsia kompleto di ortografia, fonologia, gramátika, orígen i vokabulario di Papiamentu — basá riba standart ofisial di FPI i Buki di Oro.</div>
+  <div class="hero-fpi">
+    <div class="fpi-tag">STANDART FPI / KÒRSOU</div>
+    <div class="fpi-tag">FONÉMIKO — NO ETIMOLÓJIKO</div>
+    <div class="fpi-tag">+250.000 PAPIADOR</div>
+    <div class="fpi-tag">LENGUÁ OFISIAL 2007</div>
+  </div>
+  <div class="scroll-hint"><span>BAHA</span><div class="scroll-arr"></div></div>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="orígen">
+  <div class="section-inner">
+    <div class="sec-label">HISTORIA</div>
+    <div class="sec-title">Manera e Lengua <em>a Nase</em></div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Teória di Orígen Prinsipal</div>
+        <div class="card-body">E konsensus sientífiko aktual (Bart Jacobs, 2009/2012) ta duna evidensia ku Papiamentu ta desendé di un <strong>Kreol Portugés di Guinea Superior</strong> — Kabu Verdi, Ginea-Bisau, Casamance. Esklabo Afrikano ku tabata papiá e kriol akí a wòrdu trahá bini na siman di e siglo XVII. E variante Portugés-basá despues a pasa pa un proseso di <strong>releksifikashon riba Spañó</strong> — kambia e palabranan, pero keda e gramátika i fonologia di orígen. Maurer (APiCS 47) ta propone un orígen di multi-sòrs tambe.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Kapanan di Lenguá</div>
+        <div class="card-body">
+          <strong>Ibero-Romanse (Spañó/Portugés):</strong> 66% di e vokabulario (Maduro 1953)<br><br>
+          <strong>Hulandes:</strong> 28% — terminologia formal i administrativo<br><br>
+          <strong>Afrikano:</strong> markadó plural <em>-nan</em>, pinda, funchi, djaka<br><br>
+          <strong>Ingles:</strong> prèstamo moderno, krese kontinuamente<br><br>
+          <strong>Arawak:</strong> flora, fauna, lugárnan: kunuku, kadushi, yuana
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:32px;">
+      <div class="card-title" style="font-family:var(--font-serif);font-size:20px;color:var(--gold2);margin-bottom:20px;">Komposishon di Vokabulario</div>
+      <div class="origin-layers">
+        <div class="layer"><div class="layer-bar" style="width:462px;background:#d4a853;min-width:60px;">66%</div><div class="layer-label">Ibero-Romanse (Spañó / Portugés)</div></div>
+        <div class="layer"><div class="layer-bar" style="width:196px;background:#8ab4d4;min-width:40px;">28%</div><div class="layer-label">Hulandes</div></div>
+        <div class="layer"><div class="layer-bar" style="width:42px;background:#a0c890;min-width:30px;">4%</div><div class="layer-label">Ingles / Franses / Otro</div></div>
+        <div class="layer"><div class="layer-bar" style="width:28px;background:#d4906a;min-width:24px;">2%</div><div class="layer-label">Afrikano / Arawak</div></div>
+      </div>
+    </div>
+    <div style="margin-top:48px;">
+      <div class="card-title" style="font-family:var(--font-serif);font-size:24px;color:var(--gold2);margin-bottom:28px;">Linia di Tempu</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-year">1499</div><div class="tl-text">Spañó a yega na e islanan ABC. Fundá komo <em>islas inútiles</em> — sin metal presioso.</div></div>
+        <div class="tl-item"><div class="tl-year">1634</div><div class="tl-text"><strong>Hulandes</strong> a tuma Kòrsou for di Spañó. WIC a kuminsá usa e isla komo depot pa negoshi di esklabo.</div></div>
+        <div class="tl-item"><div class="tl-year">1648–1713</div><div class="tl-text">WIC tabata tene asiento pa bende esklabo na kolonhianan Spañó. Medio 3,000 esklabo pa aña a yega entre 1667–1674. Esklabo Afrikano a bira mas ku Europeo rònt di 1700.</div></div>
+        <div class="tl-item"><div class="tl-year">1659</div><div class="tl-text"><strong>Yudianan Sefardiko Portugés</strong> a yega na Kòrsou. Nan a trese un variante di Kreol Portugés/Spañó.</div></div>
+        <div class="tl-item"><div class="tl-year">Fina XVII siglo</div><div class="tl-text">E proto-variante Portugés-basá a pasa proseso di <strong>releksifikashon riba Spañó</strong> den 30–40 aña.</div></div>
+        <div class="tl-item"><div class="tl-year">1775</div><div class="tl-text">Promé teksto skribi konoshí: karta di Abraham Andrade na Sarah Vaz Parro.</div></div>
+        <div class="tl-item"><div class="tl-year">1905</div><div class="tl-text">Promé obra literario: poema <em>Atardi</em> di <strong>Joseph Sickman Corsen</strong>, den jornal <em>La Cruz</em>.</div></div>
+        <div class="tl-item"><div class="tl-year">1976</div><div class="tl-text">Ortografia provishonal di <strong>Römer–Maduro–Jonis</strong> a wòrdu asetá ofishalmente.</div></div>
+        <div class="tl-item"><div class="tl-year">28 Mart 2007</div><div class="tl-text">Papiamentu a wòrdu deklará <strong>lenguá ofisial</strong> di Antia Hulandes.</div></div>
+        <div class="tl-item"><div class="tl-year">Juni 2009</div><div class="tl-text"><strong>Buki di Oro</strong> a wòrdu publiká pa FPI — +18,000 palabra, standart ofisial di ortografia.</div></div>
+        <div class="tl-item"><div class="tl-year">10 Oktober 2010</div><div class="tl-text">Antia Hulandes a disolbé. Kòrsou a bira pais autónomo. Status ofisial di Papiamentu a keda.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="ortografia">
+  <div class="section-inner">
+    <div class="sec-label">BUKI DI ORO / FPI</div>
+    <div class="sec-title">Ortografia <em>Ofisial</em></div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Sistema Fonémiko</div>
+        <div class="card-body">
+          Kòrsou ta usa un sistema <strong>fonémiko</strong>: kada lèt representá un sonido. E letra <strong>c</strong> no ta wòrdu usá — remplasá pa <strong>k</strong> (antes a, o, u, l, n, r, t) of <strong>s</strong> (antes e, i).<br><br>
+          <span class="tag-err">casa, cinco, cura</span><br>
+          <span class="tag-ok">kas, sinku, kura</span><br><br>
+          Diferensia ku Papiamento di Aruba: Aruba ta usa sistema etimolójiko. Kòrsou ta usa sistema fonémiko.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">4 Digráfo Ofisial</div>
+        <div class="card-body">
+          <table class="ref-table">
+            <tr><th>Digráfo</th><th>IPA</th><th>Ehèmpel</th></tr>
+            <tr><td>ch</td><td>[tʃ]</td><td>chapi, choncho</td></tr>
+            <tr><td>dj</td><td>[dʒ]</td><td>djaka, djente</td></tr>
+            <tr><td>sh</td><td>[ʃ]</td><td>shete, dashi</td></tr>
+            <tr><td>zj</td><td>[ʒ]</td><td>zjar, zjilèt</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:40px;">
+      <div class="card-title" style="font-family:var(--font-serif);font-size:24px;color:var(--gold2);margin-bottom:8px;">Markanan di Aksentu</div>
+      <div class="accent-demo">
+        <div class="accent-box">
+          <span class="accent-mark">á é í ó ú</span>
+          <span class="accent-name">AKUUT ( ´ ) — STRES / TONO HALTU</span>
+          <div class="accent-rule">Obligatorio riba: oxítono ku kaba na vokal (piská), paroxítono ku kaba na konsonante (fásil), proparoxítono (último), agent noun (piskadó).</div>
+          <div class="accent-examples"><span class="aex">piská</span><span class="aex">fásil</span><span class="aex">último</span><span class="aex">piskadó</span><span class="aex">hóben</span><span class="aex">raís</span></div>
+        </div>
+        <div class="accent-box">
+          <span class="accent-mark">è ò ù</span>
+          <span class="accent-name">GRAV ( ` ) — KALIDAT DI VOKAL</span>
+          <div class="accent-rule">Marká kalidat di vokal abiertu: è=[ɛ], ò=[ɔ], ù=[ʏ]. NO marká stres. Kuando grav ta presente, no pon akuut tambe.</div>
+          <div class="accent-examples"><span class="aex">kèlki</span><span class="aex">sòpi</span><span class="aex">bùs</span><span class="aex">bèrdat</span><span class="aex">Kòrsou</span></div>
+        </div>
+        <div class="accent-box">
+          <span class="accent-mark">ü</span>
+          <span class="accent-name">DIÉRESIS ( ¨ ) — HULANDES</span>
+          <div class="accent-rule">Solamente riba ü=[y] den prèstamo Hulandes. No ta wòrdu usá pa otro proposito.</div>
+          <div class="accent-examples"><span class="aex">hür</span><span class="aex">zür</span><span class="aex">minüt</span><span class="aex">stür</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:32px;">
+      <div class="card-title">Kòrsou vs Aruba — Diferenshianan Klave</div>
+      <div class="card-body">
+        <table class="ref-table">
+          <tr><th>Aspekto</th><th>Kòrsou (Papiamentu) ✓</th><th>Aruba (Papiamento) ✗</th></tr>
+          <tr><td>Sistema</td><td class="tag-ok">Fonémiko</td><td class="tag-err">Etimolójiko</td></tr>
+          <tr><td>c → k/s</td><td class="tag-ok">kas, sinku</td><td class="tag-err">cas, cinco</td></tr>
+          <tr><td>Final -u</td><td class="tag-ok">sinku, Papiamentu</td><td class="tag-err">cinco, Papiamento</td></tr>
+          <tr><td>"I" (and)</td><td class="tag-ok">i</td><td class="tag-err">y</td></tr>
+          <tr><td>Aksentu</td><td class="tag-ok">è ò ù ü ´ `</td><td class="tag-err">Minimo/ningun</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="fpi-box">
+      <div class="fpi-title">Fundashon pa Planifikashon di Idioma (FPI)</div>
+      <div class="fpi-text">FPI a wòrdu fundá na April 1998 pa Konseho Insular di Kòrsou pa krea polítika di lenguá. E ta publiká e <em>Buki di Oro</em> (Ortografia i Lista di Palabra Papiamentu, Juni 2009, ISBN 978-99904-2-200-9) — +18,000 palabra standarisá. Team editorial: Silvio Jonis (koordinadó), Sidney Joubert (sekretario), Hubert Lemmens, Manuel Maduro i Ronald Severing. Wèbsait: <strong>fpi.cw</strong></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="fonologia">
+  <div class="section-inner">
+    <div class="sec-label">SONIDO</div>
+    <div class="sec-title">Fonologia i <em>Pronunsiashon</em></div>
+    <div id="pronWidget">
+      <div class="pron-tabs">
+        <button class="pron-tab active" onclick="showPron('vowels',this)">VOKAL</button>
+        <button class="pron-tab" onclick="showPron('digraphs',this)">DIGRÁFO</button>
+        <button class="pron-tab" onclick="showPron('tone',this)">TONO</button>
+        <button class="pron-tab" onclick="showPron('diphthongs',this)">DIFTONG</button>
+      </div>
+      <div class="pron-panel active" id="panel-vowels"><div class="sound-grid" id="vowelGrid"></div></div>
+      <div class="pron-panel" id="panel-digraphs"><div class="sound-grid" id="digraphGrid"></div></div>
+      <div class="pron-panel" id="panel-tone">
+        <div class="card-body" style="margin-bottom:20px;">Papiamentu tin tanto <strong>stres leksikál</strong> komo un kontraste di <strong>tono</strong> independiente — raro entre lenguanan Atlantiko (Remijsen & van Heuven 2005). Verbonan disílabo ta karga un melodia <em>baho-haltu</em> (tono II); otro palabranan ta karga un melodia <em>haltu-promé</em> (tono I).</div>
+        <table class="ref-table">
+          <tr><th>Par Mínimo</th><th>Tono</th><th>Sinifikado</th></tr>
+          <tr><td>pápà</td><td>HL (tono I)</td><td>papa (pope)</td></tr>
+          <tr><td>pàpá</td><td>LH (tono II)</td><td>tata (dad)</td></tr>
+          <tr><td>biáhà</td><td>HL</td><td>biaha (trip, noun)</td></tr>
+          <tr><td>biàhá</td><td>LH</td><td>biahá (to travel, verb)</td></tr>
+          <tr><td>bòs</td><td>marked</td><td>bòs (voice)</td></tr>
+          <tr><td>bos</td><td>unmarked</td><td>bos (forest)</td></tr>
+        </table>
+      </div>
+      <div class="pron-panel" id="panel-diphthongs">
+        <table class="ref-table">
+          <tr><th>Tipo</th><th>Diftong</th><th>Ehèmpel</th></tr>
+          <tr><td>Desendente</td><td>ai</td><td>bai, kabai</td></tr>
+          <tr><td></td><td>au</td><td>fauna, auto</td></tr>
+          <tr><td></td><td>ei</td><td>frei, esei</td></tr>
+          <tr><td></td><td>oi</td><td>morkoi</td></tr>
+          <tr><td></td><td>òi</td><td>plòis (úniko na Kòrsou)</td></tr>
+          <tr><td></td><td>ou</td><td>abou, Kòrsou</td></tr>
+          <tr><td>Asendente</td><td>ia</td><td>rabia, familia</td></tr>
+          <tr><td></td><td>ue</td><td>buèltu, guera</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="gramatika">
+  <div class="section-inner">
+    <div class="sec-label">STRUKTURA</div>
+    <div class="sec-title">Gramátika <em>Esensiál</em></div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Markadó TMA (Preverbal)</div>
+        <table class="ref-table" style="margin-top:8px;">
+          <tr><th>Markadó</th><th>Funshon</th><th>Ehèmpel</th></tr>
+          <tr><td>ta</td><td>Imperfektivo / habitual</td><td>Mi ta kanta.</td></tr>
+          <tr><td>a</td><td>Perfektivo pasado</td><td>Mi a kanta.</td></tr>
+          <tr><td>tabata</td><td>Pasado imperfektivo</td><td>Mi tabata kanta.</td></tr>
+          <tr><td>lo</td><td>Futuro / irrealis</td><td>Lo mi kanta.</td></tr>
+          <tr><td>lo ta</td><td>Futuro progresivo</td><td>Lo e ta kanta.</td></tr>
+          <tr><td>&#x2205;</td><td>Estativo / imperativo</td><td>Mi ke. Bai!</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">Pronombre</div>
+        <table class="ref-table" style="margin-top:8px;">
+          <tr><th>Persona</th><th>Suheto</th><th>Posesivo</th><th>Énfasis</th></tr>
+          <tr><td>1sg</td><td>mi</td><td>mi</td><td>ami</td></tr>
+          <tr><td>2sg</td><td>bo</td><td>bo</td><td>abo</td></tr>
+          <tr><td>3sg</td><td>e (el a)</td><td>su</td><td>e</td></tr>
+          <tr><td>1pl</td><td>nos</td><td>nos</td><td>nos</td></tr>
+          <tr><td>2pl</td><td>boso</td><td>boso</td><td>boso</td></tr>
+          <tr><td>3pl</td><td>nan</td><td>nan</td><td>nan</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Frasnan Demostratibo</div>
+      <table class="ref-table">
+        <tr><th>Papiamentu</th><th>Tradukshon</th><th>Reglá</th></tr>
+        <tr><td>Mi ta kome.</td><td>Mi ta kumiendo.</td><td>TMA ta = imperfektivo</td></tr>
+        <tr><td>Mi a kome.</td><td>Mi a kome.</td><td>TMA a = perfektivo</td></tr>
+        <tr><td>Mi tabata kome.</td><td>Mi tabata kumiendo.</td><td>TMA tabata = pasado imperfektivo</td></tr>
+        <tr><td>Lo mi kome.</td><td>Lo mi kome.</td><td>TMA lo = futuro</td></tr>
+        <tr><td>Mi no a kome.</td><td>Mi no a kome.</td><td>no antes di TMA</td></tr>
+        <tr><td>E kas di Maria ta grandi.</td><td>Maria ta tin un kas grandi.</td><td>Poseshon ku di</td></tr>
+        <tr><td>E kasnan ta bunita.</td><td>E kasnan ta bunita.</td><td>Plural -nan</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="vokabulario">
+  <div class="section-inner">
+    <div class="sec-label">PALABRANAN</div>
+    <div class="sec-title">Vokabulario <em>Esensiál</em></div>
+    <div id="search-wrap">
+      <input id="search-input" placeholder="Busca palabra... (e.g. awa, kurason, bai)" oninput="searchVocab(this.value)">
+      <div id="search-results"></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><div class="card-title">Naturalesa i Elementonan</div><table class="ref-table" id="t-nature"></table></div>
+      <div class="card"><div class="card-title">Ancestral i Espiritual</div><table class="ref-table" id="t-spirit"></table></div>
+    </div>
+    <div class="two-col" style="margin-top:20px;">
+      <div class="card"><div class="card-title">Verbnan Esensial</div><table class="ref-table" id="t-verbs"></table></div>
+      <div class="card"><div class="card-title">Expreshonnan Diario</div><table class="ref-table" id="t-phrases"></table></div>
+    </div>
+    <div style="margin-top:40px;">
+      <div class="card-title" style="font-family:var(--font-serif);font-size:24px;color:var(--gold2);margin-bottom:20px;">Refrannan</div>
+      <div class="proverb"><div class="prov-text">Muchu amèn ta daña misa.</div><div class="prov-trans">Hopi amén ta stropia misa — Demasiado di un kos bon ta malu.</div></div>
+      <div class="proverb"><div class="prov-text">Sòpi purá ta sali salu.</div><div class="prov-trans">Sòpi ku ta sali lihe ta sali salu — Prisa ta hasi yerronan.</div></div>
+      <div class="proverb"><div class="prov-text">Awe ta awe, mañan ta podisé.</div><div class="prov-trans">Awe ta awe, mañan ta posibel — No postpone pa mañan.</div></div>
+      <div class="proverb"><div class="prov-text">Un bon bisiña ta pasa famia.</div><div class="prov-trans">Un bon bisiña ta mas valioso ku famia.</div></div>
+      <div class="proverb"><div class="prov-text">Makaku bisti na seda, makaku ta keda.</div><div class="prov-trans">Un makaku bistí di seda ta keda makaku — Ropa no ta kambia karákter.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="quiz">
+  <div class="section-inner">
+    <div class="sec-label">PRUEBA BO KONOSEMENTU</div>
+    <div class="sec-title">Quiz di <em>Papiamentu</em></div>
+    <div id="quizBox"></div>
+  </div>
+</section>
+
+<script>
+// BG CANVAS
+const bgc=document.getElementById('bg-canvas'),bgx=bgc.getContext('2d');
+let BW,BH,particles=[];
+function resizeBG(){BW=bgc.width=window.innerWidth;BH=bgc.height=window.innerHeight;particles=Array.from({length:80},()=>({x:Math.random()*BW,y:Math.random()*BH,r:.5+Math.random()*1.2,a:Math.random(),da:(Math.random()-.5)*.005,vy:Math.random()*.1+.03}));}
+resizeBG();window.addEventListener('resize',resizeBG);
+function drawBG(){bgx.clearRect(0,0,BW,BH);const gr=bgx.createRadialGradient(BW*.5,BH*.4,0,BW*.5,BH*.4,Math.max(BW,BH)*.7);gr.addColorStop(0,'rgba(30,20,5,.95)');gr.addColorStop(.6,'rgba(10,8,0,.98)');gr.addColorStop(1,'rgba(0,0,0,1)');bgx.fillStyle=gr;bgx.fillRect(0,0,BW,BH);particles.forEach(p=>{p.a+=p.da;if(p.a>1||p.a<0)p.da*=-1;p.y+=p.vy;if(p.y>BH){p.y=0;p.x=Math.random()*BW;}bgx.save();bgx.globalAlpha=Math.max(0,p.a*.4);bgx.fillStyle='#d4a853';bgx.beginPath();bgx.arc(p.x,p.y,p.r,0,Math.PI*2);bgx.fill();bgx.restore();});requestAnimationFrame(drawBG);}
+drawBG();
+
+// CURSOR
+const cur=document.getElementById('cursor'),curR=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function ac(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(ac);})();
+
+// NAV
+function goto(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});}
+
+// PRONUNCIATION WIDGET
+const VOWELS=[
+  {glyph:'a',ipa:'/a/',ex:'awa, brar'},
+  {glyph:'e',ipa:'/e/',ex:'tres, smer'},
+  {glyph:'è',ipa:'/ɛ/',ex:'bèrdat, kèlki'},
+  {glyph:'i',ipa:'/i/',ex:'tin, bini'},
+  {glyph:'o',ipa:'/o/',ex:'bon, solo'},
+  {glyph:'ò',ipa:'/ɔ/',ex:'sòpi, Kòrsou'},
+  {glyph:'u',ipa:'/u/',ex:'tur, buki'},
+  {glyph:'ù',ipa:'/ʏ/',ex:'bùs, trùk'},
+  {glyph:'ü',ipa:'/y/',ex:'hür, minüt'},
+];
+const DIGRAPHS=[
+  {glyph:'ch',ipa:'[tʃ]',ex:'chapi, choncho'},
+  {glyph:'dj',ipa:'[dʒ]',ex:'djaka, djente'},
+  {glyph:'sh',ipa:'[ʃ]',ex:'shete, dashi'},
+  {glyph:'zj',ipa:'[ʒ]',ex:'zjar, zjilèt'},
+  {glyph:'gu+e/i',ipa:'[g]',ex:'guera, guepi'},
+  {glyph:'ñ',ipa:'[ɲ]',ex:'ñapa, baña'},
+];
+function buildSoundGrid(data,elId){const el=document.getElementById(elId);if(!el)return;data.forEach(d=>{const sc=document.createElement('div');sc.className='sound-card';sc.innerHTML=`<span class="glyph">${d.glyph}</span><span class="ipa">${d.ipa}</span><span class="example">${d.ex}</span><span class="playing">&#x25B6; TOKA</span>`;sc.addEventListener('click',()=>{const ctx=new(window.AudioContext||window.webkitAudioContext)();const osc=ctx.createOscillator(),gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.frequency.value=440;gain.gain.setValueAtTime(.3,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.25);osc.start();osc.stop(ctx.currentTime+.25);sc.classList.add('active');setTimeout(()=>sc.classList.remove('active'),300);});el.appendChild(sc);});}
+buildSoundGrid(VOWELS,'vowelGrid');
+buildSoundGrid(DIGRAPHS,'digraphGrid');
+function showPron(panel,btn){document.querySelectorAll('.pron-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.pron-tab').forEach(b=>b.classList.remove('active'));document.getElementById('panel-'+panel)?.classList.add('active');btn.classList.add('active');}
+
+// VOCABULARY
+const VOCAB={
+  nature:[['awa','water'],['bientu','wind'],['tera','earth / soil'],['kandela','fire'],['shelu','sky'],['laman','sea'],['solo','sun'],['luna','moon'],['strea','star'],['sanger','blood'],['bòs','voice'],['kurason','heart'],['lus','light'],['sombra','shadow'],['mondi','forest'],['rais','roots'],['simia','seed'],['blachi','leaf'],['playa','beach'],['riu','river']],
+  spirit:[['antepasadonan','ancestors'],['libertat','freedom'],['bèrdat','truth'],['alma','soul'],['spiritu','spirit'],['silénsio','silence'],['soño','dream'],['fe','faith'],['kultura','culture'],['herensia','heritage'],['memoría','memory'],['sagrado','sacred'],['orashon','prayer'],['pueblo','people'],['identidat','identity'],['tèmpu','time'],['resistensia','resistance'],['bida','life'],['lucha','struggle'],['huntu','together']],
+  verbs:[['ta','to be / imperfektivo'],['tin','to have'],['bai','to go'],['bini','to come'],['sa','to know (fakto)'],['konosé','to know (persona)'],['papia','to speak'],['bisa','to say'],['kanta','to sing'],['balia','to dance'],['kome','to eat'],['bebe','to drink'],['mira','to see'],['sinti','to feel'],['tende','to hear'],['skucha','to listen'],['duna','to give'],['haña','to find'],['kòrda','to remember'],['lubidá','to forget'],['hasi','to do/make'],['biba','to live']],
+  phrases:[['Bon bini!','Welcome!'],['Bon dia','Good morning'],['Bon tardi','Good afternoon'],['Bon nochi','Good night'],['Kon ta bai?','How are you?'],['Mi ta bon, danki!','I am fine, thank you!'],['Kon yama bo?','What is your name?'],['Mi nòmber ta ...','My name is ...'],['Mi no ta komprondé','I do not understand'],['Danki','Thank you'],['Masha danki','Thank you very much'],['Por fabor','Please'],['De nada','You are welcome'],['Mi ta stima bo','I love you'],['Laga nos bai!','Let us go!'],['Ayó!','Goodbye!'],['Kuantu ta kosta?','How much does it cost?'],['Unda ta...?','Where is...?'],['Mi ta hambrá','I am hungry'],['Mi tin sede','I am thirsty']],
+};
+const ALL_VOCAB=[];
+Object.values(VOCAB).forEach(arr=>arr.forEach(([w,m])=>ALL_VOCAB.push({w,m})));
+function buildVocabTable(data,elId){const el=document.getElementById(elId);if(!el)return;el.innerHTML='<tr><th>Papiamentu</th><th>Sinifikado</th></tr>';data.forEach(([w,m])=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${w}</td><td style="color:rgba(245,237,224,.55);font-family:var(--font-body)">${m}</td>`;el.appendChild(tr);});}
+buildVocabTable(VOCAB.nature,'t-nature');
+buildVocabTable(VOCAB.spirit,'t-spirit');
+buildVocabTable(VOCAB.verbs,'t-verbs');
+buildVocabTable(VOCAB.phrases,'t-phrases');
+function searchVocab(q){const res=document.getElementById('search-results');if(!q.trim()){res.innerHTML='';return;}const hits=ALL_VOCAB.filter(v=>v.w.toLowerCase().includes(q.toLowerCase())||v.m.toLowerCase().includes(q.toLowerCase())).slice(0,12);res.innerHTML=hits.length?hits.map(v=>`<div class="s-result"><div class="sw">${v.w}</div><div class="sm">${v.m}</div></div>`).join(''):'<div class="s-result" style="color:var(--muted)">Ningun resultado.</div>';}
+
+// QUIZ
+const QUESTIONS=[
+  {q:'Kuál ta e manera korrekto di skirbí e palabra pa "house" na Papiamentu?',opts:['casa','kasa','kas','ca'],ans:2,exp:'"kas" ta korrekto. Na Papiamentu /k/ ta skribi ku k (no c) antes di a, o, u.'},
+  {q:'Kuál aksentu ta marká kalidat di vokal abiertu (open vowel quality)?',opts:['Akuut (´)','Grav (`)','Diéresis (¨)','Ningun'],ans:1,exp:'Grav (`) ta marká kalidat di vokal: è=[ɛ], ò=[ɔ], ù=[ʏ]. NO ta marká stres.'},
+  {q:'Ken a publiká e Buki di Oro na 2009?',opts:['Gobiernu di Aruba','FPI — Fundashon pa Planifikashon di Idioma','Universiteit van de Nederlandse Antillen','UNESCO'],ans:1,exp:'FPI a publiká e Buki di Oro na Juni 2009 ku +18,000 palabra.'},
+  {q:'Kiko ta e sonido di e digráfo "zj"?',opts:['[tʃ] manera ch ingles','[ʃ] manera sh ingles','[ʒ] manera j franses','[dʒ] manera j ingles'],ans:2,exp:'"zj" ta representá e sonido [ʒ] — manera e s den "measure" ingles of e j den "jour" franses.'},
+  {q:'Na kuál aña Papiamentu a wòrdu deklará lenguá ofisial di Antia Hulandes?',opts:['1976','1998','2007','2010'],ans:2,exp:'Na 28 Mart 2007 parlamento di Antia Hulandes a deklará Papiamentu lenguá ofisial.'},
+  {q:'Kiko ta e markadó TMA pa akshon perfektivo (kompletá) na pasado?',opts:['ta','lo','a','tabata'],ans:2,exp:'"a" ta e markadó perfektivo: "Mi a kanta" = Mi a kanta (akshon kompletá).'},
+  {q:'Ku ki lenguá Papiamentu ta mas emparentá segun e teória di Bart Jacobs?',opts:['Spañó di Venezuela','Kreol Portugés di Guinea Superior (Kabu Verdi)','Hulandes di e siglo XVII','Ingles kolonial'],ans:1,exp:'Jacobs (2009/2012) a demostré ku Papiamentu ta desendé di Kreol Portugés di Guinea Superior.'},
+  {q:'Kuál ta e plural di "kas" (house)?',opts:['kasnan','kases','kassen','los kas'],ans:0,exp:'"kasnan" ta korrekto. Papiamentu ta forma plural ku e sufiks -nan.'},
+  {q:'Kiko ta e diferensia entre "bòs" i "bos"?',opts:['Nan ta igual','bòs=voice, bos=forest','bòs=forest, bos=voice','Solamente estilo'],ans:1,exp:'"bòs" (ku grav riba ò=[ɔ]) ta nifikamé "voice". "bos" ta nifikamé "forest". E grav ta kambia kalidat di vokal.'},
+  {q:'Kuál sistema di ortografia ta usa Papiamentu di Kòrsou?',opts:['Etimolójiko (manera Spañó)','Fonémiko (un lèt pa un sonido)','Hulandes','Portugés moderno'],ans:1,exp:'Kòrsou ta usa sistema fonémiko: tur lèt representá un sonido. Aruba ta usa sistema etimolójiko.'},
+];
+let qIdx=0,score=0,answered=false;
+function renderQuiz(){
+  if(qIdx>=QUESTIONS.length){document.getElementById('quizBox').innerHTML=`<div id="quiz"><div class="quiz-score">SKOR FINAL: ${score}/${QUESTIONS.length}</div><div class="quiz-q" style="font-size:24px;">Bo a finish e quiz!</div><div class="card-body" style="margin-top:16px;">Bo a kontestá ${score} di ${QUESTIONS.length} pregunta korektamente.<br><br>${score===QUESTIONS.length?'Ekselente! Bo ta un eksperto!':score>=7?'Bon trabou! Sigi studia!':'Sigi pratiká — bo ta mehora!'}</div><button class="quiz-next" style="display:inline-block;margin-top:20px;" onclick="qIdx=0;score=0;renderQuiz()">KUMINSÁ DI NOBO</button></div>`;return;}
+  const q=QUESTIONS[qIdx];answered=false;
+  document.getElementById('quizBox').innerHTML=`<div id="quiz"><div class="quiz-score">Pregunta ${qIdx+1}/${QUESTIONS.length} &middot; Skor: ${score}</div><div class="quiz-q">${q.q}</div><div class="quiz-opts">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQ(${i})">${o}</button>`).join('')}</div><div class="quiz-feedback" id="qfb"></div><button class="quiz-next" id="qnxt" onclick="qIdx++;renderQuiz()">SIGUIENTE PREGUNTA &#x2192;</button></div>`;
+}
+function answerQ(i){if(answered)return;answered=true;const q=QUESTIONS[qIdx];const opts=document.querySelectorAll('.quiz-opt');opts.forEach((o,idx)=>{if(idx===q.ans)o.classList.add('correct');else if(idx===i)o.classList.add('wrong');});if(i===q.ans)score++;document.getElementById('qfb').innerHTML=q.exp;document.getElementById('qnxt').style.display='inline-block';}
+renderQuiz();
+
+// TICKER
+const TICK=[['Papiamentu','Idioma Bibu'],['bèrdat','truth'],['libertat','freedom'],['kurason','heart'],['shelu','sky'],['laman','sea'],['awa','water'],['solo','sun'],['luna','moon'],['strea','star'],['bai','go'],['bini','come'],['dushi','sweet'],['bon','good'],['Buki di Oro','FPI 2009'],['ta','imperfektivo'],['a','perfektivo'],['lo','futuro'],['kas','house'],['sinku','5'],['shete','7'],['funchi','cornmeal'],['pinda','peanut'],['nos tera','our land'],['raís','roots']];
+(function(){const items=TICK.map(([w,m])=>`<span class="tick-w"><b>${w}</b> &middot; ${m}</span>`).join('');document.getElementById('tickInner').innerHTML=items+items;})();
+</script>
+<noscript><style>body{cursor:auto;background:#0a0800;color:#e8d8be;font-family:serif;padding:40px;max-width:700px;margin:0 auto;}h1{color:#d4a853;}</style><h1>Papiamentu — Idioma Bibu</h1><p>Aktibá JavaScript pa haña e referènsia kompleto.</p></noscript>
+</body>
+</html>
