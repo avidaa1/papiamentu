@@ -1064,22 +1064,6 @@ body{background:var(--bg);color:var(--cream);font-family:var(--font-body);font-s
       </table>
     </div>
 
-    <div class="card" style="margin-top:20px;">
-      <div class="card-title">Ai Konsulta &mdash; Preguntá Tokante Gobernashon</div>
-      <div class="card-body" style="margin-bottom:16px;">Pone bo klave di Anthropic un bia i hasi preguntanan tokante gobernashon di Kòrsou na Papiamentu.</div>
-      <div id="govKeyArea">
-        <input id="govKey" type="password" placeholder="sk-ant-..." style="width:100%;background:rgba(0,200,190,.04);border:1px solid var(--border);color:var(--cream);font-family:var(--font-body);font-size:15px;padding:10px 14px;outline:none;margin-bottom:10px;">
-        <button onclick="saveGovKey()" style="font-family:var(--font-ui);font-size:11px;letter-spacing:2px;padding:8px 18px;border:1px solid var(--border);color:var(--muted);background:transparent;cursor:pointer;">WARDA KLAVE</button>
-      </div>
-      <div id="govChat" style="margin-top:16px;">
-        <div id="govMsgs" style="min-height:80px;max-height:320px;overflow-y:auto;margin-bottom:12px;"></div>
-        <div style="display:flex;gap:8px;">
-          <input id="govInput" placeholder="Preguntá na Papiamentu tokante gobernashon..." style="flex:1;background:rgba(0,200,190,.04);border:1px solid var(--border);color:var(--cream);font-family:var(--font-serif);font-size:16px;padding:10px 14px;outline:none;" onkeydown="if(event.key==='Enter')sendGov();">
-          <button onclick="sendGov()" style="font-family:var(--font-ui);font-size:11px;letter-spacing:2px;padding:10px 18px;border:1px solid var(--border);color:var(--muted);background:transparent;cursor:pointer;">MANDA</button>
-        </div>
-        <button onclick="forgetGovKey()" style="font-family:var(--font-ui);font-size:10px;letter-spacing:1px;color:rgba(255,80,80,.5);background:transparent;border:none;cursor:pointer;margin-top:8px;">LUBIDÁ KLAVE</button>
-      </div>
-    </div>
 
   </div>
 </section>
@@ -1160,68 +1144,6 @@ function toggleCharada(el){
   });
 })();
 
-// Gov AI chat
-var govHistory=[];
-function saveGovKey(){
-  var k=document.getElementById('govKey').value.trim();
-  if(k.startsWith('sk-ant-')){
-    localStorage.setItem('avidaa_anthropic_key',k);
-    document.getElementById('govKeyArea').style.display='none';
-    addGovMsg('sistema','Klave wardá. Bo por hasi preguntanan tokante gobernashon di Kòrsou.');
-  } else {
-    addGovMsg('sistema','Klave no validó. Mester kuminsá ku sk-ant-');
-  }
-}
-function forgetGovKey(){
-  localStorage.removeItem('avidaa_anthropic_key');
-  govHistory=[];
-  document.getElementById('govMsgs').innerHTML='';
-  document.getElementById('govKeyArea').style.display='block';
-}
-function addGovMsg(role,text){
-  var el=document.getElementById('govMsgs');
-  var msg=document.createElement('div');
-  msg.style.cssText='padding:10px 14px;margin-bottom:8px;font-size:15px;line-height:1.75;'+(role==='user'?'color:var(--gold2);text-align:right;':'color:rgba(245,237,224,.82);background:rgba(0,200,190,.04);border-left:2px solid var(--border);');
-  msg.textContent=text;
-  el.appendChild(msg);
-  el.scrollTop=el.scrollHeight;
-}
-function sendGov(){
-  var key=localStorage.getItem('avidaa_anthropic_key');
-  if(!key){addGovMsg('sistema','Pone bo klave promé.');return;}
-  var input=document.getElementById('govInput');
-  var q=input.value.trim();
-  if(!q)return;
-  input.value='';
-  addGovMsg('user',q);
-  govHistory.push({role:'user',content:q});
-  addGovMsg('ai','...');
-  var msgs=document.getElementById('govMsgs');
-  var typing=msgs.lastChild;
-  fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-    body:JSON.stringify({
-      model:'claude-sonnet-4-6',
-      max_tokens:600,
-      system:'Bo ta un asistente edukativo riba gobernashon di Kòrsou. Kontestá SOLAMENTE na Papiamentu di Kòrsou (fonemiko, no Aruban Papiamento). Fokó riba edukashon siviko: ministerionan, lei, demokrasia, struktura di gobernashon, Reino di Hulanda. Nunka menshoná nòmber di politician, no duna opinion politiko, no kompartí data personal. Si pregunta riba nòmber di un minister, eksplíká ku e sekshon aki ta edukashon siviko solamente. Keep answers clear and educational.',
-      messages:govHistory
-    })
-  }).then(function(r){return r.json();}).then(function(d){
-    var reply=d.content&&d.content[0]?d.content[0].text:'No por kontestá awor.';
-    msgs.removeChild(typing);
-    addGovMsg('ai',reply);
-    govHistory.push({role:'assistant',content:reply});
-  }).catch(function(){msgs.removeChild(typing);addGovMsg('ai','Error di konekshon. Purba atrobe.');});
-}
-// Check if key already saved
-(function(){
-  var k=localStorage.getItem('avidaa_anthropic_key');
-  if(k&&k.startsWith('sk-ant-')){
-    var el=document.getElementById('govKeyArea');
-    if(el)el.style.display='none';
-  }
-})();
 
 var VOWELS=[
   {glyph:'a',ipa:'/a/',ex:'awa, kas, bai'},
@@ -1519,7 +1441,7 @@ if(document.readyState==='complete')start();else addEventListener('load',start);
 addEventListener('resize',sched);})();</script><script id="av-shell-20261124">/* AVIDAA shell: shared header (or floating pill) + footer with the "Last updated" stamp. No outside calls, no tracking.
    Template tokens are replaced when a page is built: Papiamentu --av-kids Kids and Learning 2026-11-24 06:37 */
 (function(){
-  var NAME='Papiamentu',SECTOR='--av-kids',STAMP='2026-11-25 14:45',HOME='https://avidaa1.github.io/';
+  var NAME='Papiamentu',SECTOR='--av-kids',STAMP='2026-11-25 15:20',HOME='https://avidaa1.github.io/';
   var ARROW='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function build(){
     if(!document.body||document.querySelector('.av-footer'))return;
